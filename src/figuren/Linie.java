@@ -1,30 +1,32 @@
 package figuren;
 
-import handler.FileHandler;
-
 import java.awt.*;
 import java.util.List;
 
 
 public class Linie extends Figur {
 
-    private int lenght;
+    private int x2;
+    private int y2;
+
 
     public Linie() {
         super();
     }
 
-    public Linie(int lenght, int x, int y) {
+    public Linie(int x, int y, int x2, int y2) {
         super();
-        this.lenght = lenght;
         this.x = x;
         this.y = y;
+        this.x2 = x2;
+        this.y2 = y2;
     }
 
     @Override
     public void zeichne(Graphics g){
-        g.drawLine(this.getX(), this.getX(), this.getY(), this.getY());
+        g.drawLine(this.x, this.y, this.x2, this.y2);
     }
+/*
 
     public int getLenght() {
         return lenght;
@@ -33,5 +35,6 @@ public class Linie extends Figur {
     public void setLenght(int lenght) {
         this.lenght = lenght;
     }
+*/
 
 }

@@ -1,10 +1,7 @@
 package figuren;
 
-import handler.FileHandler;
 
 import java.awt.*;
-import java.util.List;
-
 /**
  * Created by vmadmin on 19.08.2014.
  */

@@ -1,9 +1,14 @@
 package GUI;
 
+import figuren.Figur;
+import figuren.Kreis;
+import figuren.Linie;
 import figuren.Rechteck;
 import zeichnen.Zeichnung;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -20,12 +25,15 @@ import javax.swing.JPanel;
  * @author Andres Scheidegger
  */
 @SuppressWarnings("serial")
-public class Papier extends JPanel implements MouseListener {
+public class Papier extends JPanel implements MouseListener, KeyListener {
 
     private int x, y;
+    private int currentTool;
 
     public Papier() {
         addMouseListener(this);
+        addKeyListener(this);
+        this.setFocusable(true);
     }
 
     /**
@@ -73,12 +81,37 @@ public class Papier extends JPanel implements MouseListener {
         // Bestimmen Breite und Hoehe des neuen Rechtecks
         int breite = e.getX() - x;
         int hoehe = e.getY() - y;
+        int originalX = x;
+        int originalY = y;
+        System.out.println(e.getX());
+        System.out.println(x);
+
+        if(e.getX() < x) {
+            breite = x - e.getX();
+            x = e.getX();
+        }
+        if(e.getY() < y){
+            hoehe = y - e.getY();
+            y = e.getY();
+        }
+
         // Erzeugen ein neues Rechteckobjekt und speichern dieses
         // in der Zeichnung. Anschliessend alles neu zeichnen.
-        Rechteck figur = new Rechteck(x, y, breite, hoehe);
+
+        Figur figur;
+
+        switch (currentTool){
+            case 75:
+                figur = new Kreis(breite, hoehe, x, y);
+                break;
+            case 76:
+                figur = new Linie(originalX, originalY, e.getX(), e.getY());
+                break;
+            default:
+                figur = new Rechteck(breite, hoehe, x, y);
+        }
         zeichnung.addFigur(figur);
         repaint();
-
     }
 
     @Override
@@ -89,5 +122,21 @@ public class Papier extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //r = 82, k = 75, l = 76
+        currentTool = e.getKeyCode();
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }

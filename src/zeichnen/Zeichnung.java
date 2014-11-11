@@ -27,4 +27,8 @@ public class Zeichnung {
         }
 
     }
+
+    public void addFigur(Figur figur){
+        figuren.add(figur);
+    }
 }
