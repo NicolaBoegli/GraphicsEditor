@@ -6,13 +6,12 @@ import figuren.Linie;
 import figuren.Rechteck;
 import zeichnen.Zeichnung;
 
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.JPanel;
 
 /**
  * Papier ist eine von JPanel abgeleitete Swing-Komponente.
@@ -83,8 +82,6 @@ public class Papier extends JPanel implements MouseListener, KeyListener {
         int hoehe = e.getY() - y;
         int originalX = x;
         int originalY = y;
-        System.out.println(e.getX());
-        System.out.println(x);
 
         if(e.getX() < x) {
             breite = x - e.getX();
